@@ -1,3 +1,3 @@
 # CPP-Basics
 
-Covers basic C++ concepts
+From very basic to intermediate C++ concepts. Feel to fork and study!
