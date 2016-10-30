@@ -28,6 +28,7 @@ public:
     bool searchElement(int value);
     void displayList();
     void sortList();
+    void revList();
     
     CircularLinkedList()
     {
@@ -203,4 +204,27 @@ void CircularLinkedList::sortList()
         }
         ptr=ptr->next;
     }
+}
+
+void CircularLinkedList::revList()
+{
+    struct node *temp, *p, *q, *r;
+    temp = last->next;
+    p = last->next;
+    if(p!=NULL)
+        q = p->next;
+    if(q!=NULL)
+        r = q->next;
+    
+    do
+    {
+        q->next = p;
+        
+        p=q;
+        q=r;
+        r=r->next;
+    }while(p!=temp);
+    
+    /*NOW RETURN p->next (THIS WILL BE THE NEW HEAD)*/
+    
 }
