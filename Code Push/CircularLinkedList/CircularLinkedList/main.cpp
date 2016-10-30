@@ -141,3 +141,66 @@ void CircularLinkedList::deleteElement(int value)
     cout<<"Element not found in the list"<<endl;
     
 }
+
+bool CircularLinkedList::searchElement(int value)
+{
+    struct node *ptr;
+    ptr = last->next;
+    while(ptr!=last)
+    {
+        if(ptr->data == value)
+        {
+            return true;
+        }
+        ptr = ptr->next;
+    }
+    return false;
+}
+
+void CircularLinkedList::displayList()
+{
+    if(last == NULL)
+    {
+        cout<<"EMPTY LIST"<<endl;
+    }
+    struct node *ptr;
+    ptr = last->next;
+    while(ptr!=last)
+    {
+        cout<<ptr->data<<endl;
+    }
+    ptr = ptr->next;
+}
+
+void CircularLinkedList::sortList()
+{
+    struct node *ptr, *compare;
+    int temp;
+    ptr = last->next;
+    if(last == NULL)
+    {
+        cout<<"EMPTY LIST"<<endl;
+    }
+    while(ptr!=last)
+    {
+        compare = ptr->next;
+        while (compare!=last->next)
+        {
+            if(compare!=last->next)
+            {
+                if(ptr->data > compare->data)
+                {
+                    temp = ptr->data;
+                    ptr->data = compare->data;
+                    compare->data = temp;
+                }
+            }
+            else
+            {
+                break;
+            }
+            compare=compare->next;
+        }
+        ptr=ptr->next;
+    }
+}
