@@ -50,7 +50,7 @@ public:
         else
         {
             q = front;
-            while (q->link != NULL && q->link->priority <= priority)
+            while (q->link != NULL && q->link->priority >= priority)
                 q=q->link;
             tmp->link = q->link;
             q->link = tmp;
@@ -63,7 +63,7 @@ public:
     {
         node *tmp;
         if(front == NULL)
-            cout<<"Queue Underflow\n";
+            cout<<"========Queue Underflow========\n";
         else
         {
             tmp = front;
