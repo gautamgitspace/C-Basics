@@ -4,9 +4,10 @@
 //
 //  Created by Gautam on 11/2/16.
 //  Copyright © 2016 Gautam. All rights reserved.
-//
+//  Queue and circular queue (job replacement)
 
 #include <iostream>
+#define MAX 5
 
 using namespace std;
 
@@ -25,26 +26,44 @@ public:Queue()
     }
 public:void enqueue(int value)
     {
-        size++;
-        node *temp = new(struct node);
-        temp->data = value;
-        if(head == NULL)
+        if(size < MAX)
         {
-            /*FIRST ENQUEUE*/
-            head = temp;
-            tail = head;
-            tail->link = NULL;
-            cout<<"ADDED: "<<temp->data<<endl;
+            size++;
+            node *temp = new(struct node);
+            temp->data = value;
+            if(head == NULL)
+            {
+                /*FIRST ENQUEUE*/
+                head = temp;
+                tail = head;
+                tail->link = NULL;
+                cout<<"ADDED: "<<temp->data<<endl;
+                cout<<"HEAD IS:"<<head->data<<endl;
+            }
+            else
+            {
+                /*ENQUEUE TO EXISTING*/
+                tail->link = temp;
+                tail = temp;
+                tail->link = NULL;
+                cout<<"ADDED: "<<temp->data<<endl;
+            }
         }
         else
         {
-            /*ENQUEUE TO EXISTING*/
+            cout<<"QUEUE FULL. AGING IN ACTION..."<<endl;
+            cout<<"ADDED: "<<value<<endl;
+            cout<<"AGED SERVING: "<<head->data<<endl;;
+            dequeue();
+            
+            node *temp = new(struct node);
+            temp->data = value;
             tail->link = temp;
             tail = temp;
             tail->link = NULL;
-            cout<<"ADDED: "<<temp->data<<endl;
+            size++;
+            
         }
-        
     }
 public:int dequeue()
     {
@@ -87,5 +106,20 @@ int main(int argc, const char * argv[])
     cout<<"NEXT IN LINE: "<<queue.peak()<<endl;
     cout<<"NOW SERVING: "<<queue.dequeue()<<endl;
     cout<<"NEXT IN LINE: "<<queue.peak()<<endl;
+    cout<<"SIZE OF Queue after 2 served: "<<queue.sizeOfQueue()<<endl;
+    queue.enqueue(100);
+    queue.enqueue(200);
+    cout<<"SIZE OF Queue: "<<queue.sizeOfQueue()<<endl;
+    cout<<"TRYING TO ADD"<<endl;
+    queue.enqueue(300);
+    cout<<"SIZE OF Queue: "<<queue.sizeOfQueue()<<endl;
+    cout<<"NEXT IN LINE: "<<queue.peak()<<endl;
+    cout<<"======================="<<endl;
+    cout<<"NOW SERVING: "<<queue.dequeue()<<endl;
+    cout<<"NOW SERVING: "<<queue.dequeue()<<endl;
+    cout<<"NOW SERVING: "<<queue.dequeue()<<endl;
+    cout<<"NOW SERVING: "<<queue.dequeue()<<endl;
+    cout<<"NOW SERVING: "<<queue.dequeue()<<endl;
+    
     return 0;
 }
