@@ -12,18 +12,13 @@
 #include <cstdlib>
 using namespace std;
 
-/*
- * Node Declaration
- */
 struct node
 {
     int priority;
     char info[10];
     struct node *link;
 };
-/*
- * Class Priority Queue
- */
+
 class Priority_Queue
 {
 private:
@@ -33,9 +28,7 @@ public:
     {
         front = NULL;
     }
-    /*
-     * Insert into Priority Queue
-     */
+
     void insert(char *info, int priority)
     {
         node *tmp, *q;
@@ -56,9 +49,7 @@ public:
             q->link = tmp;
         }
     }
-    /*
-     * Delete from Priority Queue
-     */
+
     void allocateToCPU()
     {
         node *tmp;
@@ -72,9 +63,7 @@ public:
             free(tmp);
         }
     }
-    /*
-     * Print Priority Queue
-     */
+
     void displayJobs()
     {
         node *ptr;
@@ -92,9 +81,7 @@ public:
         }
     }
 };
-/*
- * Main
- */
+
 int main()
 {
     int choice, priority;
